@@ -23,6 +23,11 @@ export const Header = ({totalCount, totalPrice}: Props) => {
         navigate ('/dish/create')
     }
 
+    const goToBasket = () => {
+      navigate ('/basket')
+    }
+    }
+
     return(
         <div>
             <Box sx={{ flexGrow: 1 }}>
