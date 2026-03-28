@@ -11,7 +11,7 @@ interface Props {
     clearBasket: () => void,
 }
 
-export const Basket = ({basketState,addDishToBasket, decreaseDishInBasket, clearBasket,}:Props) => {
+export const Basket = ({basketState, addDishToBasket, decreaseDishInBasket, clearBasket,}:Props) => {
     const {items,totalCount,totalPrice} = basketState
     const [loading, setLoading] = useState(false);
 
