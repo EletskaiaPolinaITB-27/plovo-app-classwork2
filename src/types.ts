@@ -18,3 +18,15 @@ export interface IBasketState{
   totalPrice: number
   totalCount: number
 }
+export interface IDeliveryDetails {
+  name: string;
+  address: string;
+  phone: string;
+}
+
+export interface IOrder {
+  items: IBasket[];
+  totalPrice: number;
+  totalCount: number;
+  deliveryDetails: IDeliveryDetails;
+}
