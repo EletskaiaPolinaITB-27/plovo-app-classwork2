@@ -39,3 +39,40 @@ export const addDishToBasket = (currentState: IBasketState, dish: IDish): IBaske
     totalPrice,
   }
 }
+
+export const decreaseDishInBasket = (currentState: IBasketState, dishId: string): IBasketState => {
+  const updatedItems = currentState.items
+    .map((item) => {
+      if (item.dish.id === dishId) {
+        return {
+          ...item,
+          count: item.count - 1
+        }
+      }
+
+      return item
+    })
+    .filter((item) => item.count > 0)
+
+  const totalCount = updatedItems.reduce((sum, item) => {
+    return sum + item.count
+  }, 0)
+
+  const totalPrice = updatedItems.reduce((sum, item) => {
+    return sum + (item.dish.price * item.count)
+  }, 0)
+
+  return {
+    items: updatedItems,
+    totalCount,
+    totalPrice,
+  }
+}
+
+export const clearBasket = (): IBasketState => {
+  return {
+    items: [],
+    totalCount: 0,
+    totalPrice: 0,
+  }
+}
