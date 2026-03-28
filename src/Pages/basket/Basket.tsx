@@ -1,8 +1,10 @@
-import { Container, Typography } from "@mui/material"
+import { Container, Grid, Typography } from "@mui/material"
 import type { IBasketState, IDeliveryDetails, IDish } from "../../types"
 import { Link } from "@mui/icons-material"
 import { useState } from "react"
 import { axiosApi } from "../../axiosApi"
+import { BasketItems } from "../../components/basket-items/BasketItems"
+import { OrderForm } from "../../components/order-form/OrderForm"
 
 interface Props {
     basketState: IBasketState,
@@ -51,6 +53,27 @@ export const Basket = ({basketState, addDishToBasket, decreaseDishInBasket, clea
 
 
     return(
-        <div></div>
+        <Container sx={{ mt: 4 }}>
+      <Grid container spacing={4}>
+        <Grid size={{ xs: 12, md: 7 }}>
+          <BasketItems
+            items={items}
+            totalCount={totalCount}
+            totalPrice={totalPrice}
+            onIncrease={(dishId) => {
+              const basketItem = items.find((item) => item.dish.id === dishId);
+              if (basketItem) {
+                addDishToBasket(basketItem.dish);
+              }
+            }}
+            onDecrease={decreaseDishInBasket}
+          />
+        </Grid>
+
+        <Grid size={{ xs: 12, md: 5 }}>
+          <OrderForm loading={loading} onSubmit={submitOrder} />
+        </Grid>
+      </Grid>
+    </Container>
     )
 }
